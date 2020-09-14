@@ -56,9 +56,9 @@ class CPU:
         elif op == "CMP":
             if self.reg[reg_a] == self.reg[reg_b]:
                 self.fl = 0b00000001
-            if self.reg[reg_a] > self.reg[reg_b]:
+            elif self.reg[reg_a] > self.reg[reg_b]:
                 self.fl = 0b00000010
-            if self.reg[reg_a] < self.reg[reg_b]:
+            elif self.reg[reg_a] < self.reg[reg_b]:
                 self.fl = 0b00000100
 
         else:
@@ -169,7 +169,7 @@ class CPU:
                 self.pc += 2
 
             elif self.ir == 0b10100111: # CMP
-                self.alu("CMP", self.ram[self.ir + 1], self.ram[self.ir + 2])
+                self.alu("CMP", self.ram[self.pc + 1], self.ram[self.pc + 2])
                 self.pc += 2
 
             else:
