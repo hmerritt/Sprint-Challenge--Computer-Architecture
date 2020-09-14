@@ -136,6 +136,22 @@ class CPU:
                 self.pc = ret_addr
                 continue
 
+            elif self.ir == 0b01010100: # JMP
+                self.pc = self.reg[self.ram[self.pc + 1]]
+                continue
+
+            elif self.ir == 0b01010101: # JEQ
+                if self.fl == 0b00000001:
+                    self.pc = self.reg[self.ram[self.pc + 1]]
+                    continue
+                self.pc += 1
+
+            elif self.ir == 0b01010110: # JNE
+                if self.fl != 0b00000001:
+                    self.pc = self.reg[self.ram[self.pc + 1]]
+                    continue
+                self.pc += 1
+
             elif self.ir == 0b01000111: # PRN R0
                 self.pc += 1
                 print(self.reg[self.ram[self.pc]])
